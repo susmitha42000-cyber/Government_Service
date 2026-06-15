@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Application - National Government Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="stacklyPageLoader" class="stackly-page-loader is-visible" aria-hidden="true">
+        <div class="stackly-page-loader__panel">
+            <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="stackly-page-loader__logo">
+            <div class="stackly-page-loader__text">Loading</div>
+        </div>
+    </div>
+
+    <!-- ============ HEADER ============ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-top-content">
+                <div class="logo-section">
+                    <a href="index.html" class="brand-link" aria-label="Stackly home">
+                        <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="brand-logo brand-logo--header">
+                    </a>
+                </div>
+                <nav class="navbar">
+                    <div class="nav-wrapper">
+                        <button class="hamburger" id="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <ul class="nav-menu" id="navMenu">
+                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="about.html" class="nav-link">About</a></li>
+                            <li><a href="services.html" class="nav-link">Services</a></li>
+                            <li><a href="schemes.html" class="nav-link">Welfare Schemes</a></li>
+                            <li><a href="departments.html" class="nav-link">Departments</a></li>
+                            <li><a href="notices.html" class="nav-link">Public Notice</a></li>
+                            <li><a href="news.html" class="nav-link">News & Media</a></li>
+                            <li><a href="contact.html" class="nav-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="header-controls">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-register">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tracking -->
+    <section class="tracking" id="tracking">
+        <div class="container">
+            <h2 class="section-title">Track Your Application</h2>
+            <p class="section-subtitle">Check the status of your submitted applications</p>
+
+            <div class="tracking-container">
+                <div class="tracking-form">
+                    <div class="form-group">
+                        <label for="appNumber">Application Number</label>
+                        <input type="text" id="appNumber" placeholder="Enter your application number" maxlength="15">
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="tel" id="mobileNumber" placeholder="Enter your 10-digit mobile number" maxlength="10">
+                    </div>
+                    <button class="btn btn-primary" onclick="trackApplication()">
+                        <i class="fas fa-search"></i> Check Status
+                    </button>
+                </div>
+
+                <div id="trackingResult" class="tracking-result" style="display: none;">
+                    <div class="result-header">
+                        <h3>Application Status</h3>
+                        <p id="resultAppNumber"></p>
+                    </div>
+                    <div class="status-timeline">
+                        <div class="status-item submitted">
+                            <div class="status-circle"></div>
+                            <p>Submitted</p>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-circle"></div>
+                            <p>Verification</p>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-circle"></div>
+                            <p>Processing</p>
+                        </div>
+                        <div class="status-item">
+                            <div class="status-circle"></div>
+                            <p>Approval</p>
+                        </div>
+                    </div>
+                    <div class="status-details">
+                        <p><strong>Current Status:</strong> <span id="currentStatus">Submitted</span></p>
+                        <p><strong>Last Update:</strong> <span id="lastUpdate">Today at 10:30 AM</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <a href="index.html" class="brand-link" aria-label="Stackly home">
+                    <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="brand-logo brand-logo--footer">
+                </a>
+            </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="schemes.html">Schemes</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="404.html">Certificates</a></li>
+                        <li><a href="404.html">Licenses</a></li>
+                        <li><a href="404.html">Applications</a></li>
+                        <li><a href="404.html">Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="404.html">Privacy Policy</a></li>
+                        <li><a href="404.html">Terms & Conditions</a></li>
+                        <li><a href="404.html">Accessibility Statement</a></li>
+                        <li><a href="404.html">Help & Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 National Government Portal. All Rights Reserved.</p>
+                <div class="footer-badges">
+                    <span class="badge">Secured by Government</span>
+                    <span class="badge">ISO Certified</span>
+                    <span class="badge">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="backToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+  <script>
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('a, button');
+      if (!link) return;
+      const text = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const aria = (link.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const title = (link.getAttribute('title') || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const target = ['explore services', 'apply online', 'learn more', 'view details', 'download pdf', 'check status', 'read more', 'facebook', 'x', 'twitter', 'instagram', 'youtube', 'linkedin'];
+      if (target.includes(text) || target.includes(aria) || target.includes(title)) {
+        event.preventDefault();
+        window.location.href = '404.html';
+      }
+    }, true);
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

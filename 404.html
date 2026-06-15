@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found</title>
+  <meta name="description" content="The requested page could not be found." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --bg: #1a1025;
+      --bg-2: #2a1840;
+      --panel: rgba(35, 20, 54, 0.84);
+      --panel-border: rgba(106, 59, 160, 0.18);
+      --text: #eef5ff;
+      --muted: rgba(238, 245, 255, 0.72);
+      --accent: #6a3ba0;
+      --accent-2: #8f5fd3;
+      --accent-3: #4a235a;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: "Poppins", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(106, 59, 160, 0.22), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(74, 35, 90, 0.2), transparent 30%),
+        linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 55%, #06101c 100%);
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.55;
+      filter: blur(2px);
+    }
+
+    .orb.one {
+      width: 280px;
+      height: 280px;
+      top: 8%;
+      left: -80px;
+      background: rgba(106, 59, 160, 0.18);
+      box-shadow: 0 0 120px rgba(106, 59, 160, 0.18);
+    }
+
+    .orb.two {
+      width: 220px;
+      height: 220px;
+      right: -70px;
+      bottom: 10%;
+      background: rgba(74, 35, 90, 0.18);
+      box-shadow: 0 0 120px rgba(74, 35, 90, 0.18);
+    }
+
+    .card {
+      width: min(640px, 100%);
+      position: relative;
+      border-radius: 26px;
+      border: 1px solid var(--panel-border);
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(35, 20, 54, 0.95), rgba(74, 35, 90, 0.92)),
+        url("assets/hero-bg.svg") center/cover no-repeat;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(106, 59, 160, 0.18), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(74, 35, 90, 0.16), transparent 38%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .home-brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      margin-bottom: 6px;
+    }
+
+    .home-brand img {
+      width: 138px;
+      max-width: 44vw;
+      height: auto;
+      display: block;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(106, 59, 160, 0.12);
+      color: var(--accent-2);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(143, 95, 211, 0.2);
+    }
+
+    .code {
+      font-size: clamp(4.4rem, 14vw, 7rem);
+      font-weight: 800;
+      line-height: 0.9;
+      margin: 12px 0 0;
+      letter-spacing: -0.06em;
+      color: #ffffff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.4vw, 2.7rem);
+      line-height: 1.05;
+    }
+
+    p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+
+    .status-box {
+      display: grid;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .status-box strong {
+      font-size: 0.98rem;
+    }
+
+    .status-box span {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid transparent;
+      color: var(--text);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-3), var(--accent));
+      box-shadow: 0 14px 28px rgba(106, 59, 160, 0.26);
+    }
+    .btn.ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .action-link {
+      text-decoration: none;
+      border-radius: 18px;
+      padding: 14px 16px;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .action-link:hover {
+      transform: translateY(-2px);
+      border-color: rgba(143, 95, 211, 0.38);
+      background: rgba(106, 59, 160, 0.08);
+    }
+
+    .action-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(74, 35, 90, 0.2), rgba(106, 59, 160, 0.24));
+      color: var(--accent-2);
+      font-weight: 800;
+      flex: none;
+      border: 1px solid rgba(143, 95, 211, 0.18);
+      font-size: 0.78rem;
+    }
+
+    .action-link strong {
+      display: block;
+      font-size: 0.98rem;
+      margin-bottom: 2px;
+    }
+
+    .action-link span:last-child {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .social {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .social:hover {
+      transform: translateY(-2px);
+      background: rgba(106, 59, 160, 0.1);
+    }
+
+    @media (max-width: 640px) {
+      .content { padding: 24px 16px; }
+      .link-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="stacklyPageLoader" class="stackly-page-loader is-visible" aria-hidden="true">
+    <div class="stackly-page-loader__panel">
+      <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="stackly-page-loader__logo">
+      <div class="stackly-page-loader__text">Loading</div>
+    </div>
+  </div>
+
+  <div class="orb one" aria-hidden="true"></div>
+  <div class="orb two" aria-hidden="true"></div>
+
+  <main class="page">
+    <section class="card" aria-labelledby="page-title">
+      <div class="content">
+        <a href="index.html" class="home-brand" aria-label="Stackly home">
+          <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly">
+        </a>
+        <div>
+          <div class="eyebrow">Government Services Portal</div>
+          <div class="code">404</div>
+          <h1 id="page-title">We couldn't find that page.</h1>
+          <p>
+            The link may be outdated, moved, or typed incorrectly. Use the options below to go back,
+            return home, or continue browsing services.
+          </p>
+        </div>
+
+        <div class="status-box">
+          <strong>Quick recovery</strong>
+          <span>
+            Try the back button if you just came from another page, or head straight to the home page.
+          </span>
+          <div class="hero-actions">
+            <a class="btn ghost" href="javascript:history.back()">Go Back</a>
+            <a class="btn primary" href="index.html">Back to Home</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

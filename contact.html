@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - National Government Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="stacklyPageLoader" class="stackly-page-loader is-visible" aria-hidden="true">
+        <div class="stackly-page-loader__panel">
+            <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="stackly-page-loader__logo">
+            <div class="stackly-page-loader__text">Loading</div>
+        </div>
+    </div>
+
+    <!-- ============ HEADER ============ -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="header-top-content">
+                <div class="logo-section">
+                    <a href="index.html" class="brand-link" aria-label="Stackly home">
+                        <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="brand-logo brand-logo--header">
+                    </a>
+                </div>
+                <nav class="navbar">
+                    <div class="nav-wrapper">
+                        <button class="hamburger" id="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <ul class="nav-menu" id="navMenu">
+                            <li><a href="index.html" class="nav-link">Home</a></li>
+                            <li><a href="about.html" class="nav-link">About</a></li>
+                            <li><a href="services.html" class="nav-link">Services</a></li>
+                            <li><a href="schemes.html" class="nav-link">Welfare Schemes</a></li>
+                            <li><a href="departments.html" class="nav-link">Departments</a></li>
+                            <li><a href="notices.html" class="nav-link">Public Notice</a></li>
+                            <li><a href="news.html" class="nav-link">News & Media</a></li>
+                            <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="header-controls">
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-register">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Have questions? We're here to help</p>
+            
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm" autocomplete="off">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" autocomplete="off" pattern="[A-Za-z ]+" title="Use letters only" required>
+                            <div class="error-message" id="fullNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" autocomplete="off" required>
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Mobile Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your 10-digit mobile number" maxlength="10" autocomplete="off" required>
+                            <div class="error-message" id="phoneError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="How can we help you?" autocomplete="off" required>
+                            <div class="error-message" id="subjectError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Write your message here" autocomplete="off" required></textarea>
+                            <div class="error-message" id="messageError"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h4>Office Address</h4>
+                        <p>National Government Portal Office<br>Central Administrative Building<br>New Delhi - 110001, India</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <h4>Helpline Number</h4>
+                        <p>Toll Free: 1800-1234-5678<br>Mobile: +91-11-2345-6789<br>Available: 24×7</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <h4>Email Address</h4>
+                        <p>support@governmentportal.gov.in<br>feedback@governmentportal.gov.in<br>Response Time: 24 hours</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-clock"></i></div>
+                        <h4>Office Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 10:00 AM - 4:00 PM<br>Sunday & Holidays: Closed</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Map Embed -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.0211733568927!2d77.18949267606102!3d28.614689375754354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d04b8c9b8e9d9%3A0x94adb1ff67b5f6d1!2sRashtrapati%20Bhavan!5e0!3m2!1sen!2sin!4v1622051234567" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <a href="index.html" class="brand-link" aria-label="Stackly home">
+                    <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="brand-logo brand-logo--footer">
+                </a>
+            </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="schemes.html">Schemes</a></li>
+                        <li><a href="departments.html">Departments</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="404.html">Certificates</a></li>
+                        <li><a href="404.html">Licenses</a></li>
+                        <li><a href="404.html">Applications</a></li>
+                        <li><a href="404.html">Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="404.html">Privacy Policy</a></li>
+                        <li><a href="404.html">Terms & Conditions</a></li>
+                        <li><a href="404.html">Accessibility Statement</a></li>
+                        <li><a href="404.html">Help & Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 National Government Portal. All Rights Reserved.</p>
+                <div class="footer-badges">
+                    <span class="badge">Secured by Government</span>
+                    <span class="badge">ISO Certified</span>
+                    <span class="badge">24/7 Support</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="backToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+  <script>
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('a, button');
+      if (!link) return;
+      const text = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const aria = (link.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const title = (link.getAttribute('title') || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      const target = ['explore services', 'apply online', 'learn more', 'view details', 'download pdf', 'check status', 'read more', 'facebook', 'x', 'twitter', 'instagram', 'youtube', 'linkedin'];
+      if (target.includes(text) || target.includes(aria) || target.includes(title)) {
+        event.preventDefault();
+        window.location.href = '404.html';
+      }
+    }, true);
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

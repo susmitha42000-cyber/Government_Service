@@ -13,79 +13,271 @@
         }
 
         :root {
-            --primary-blue: #4A235A;
-            --secondary-blue: #6A3BA0;
-            --accent-orange: #D4AF37;
-            --light-gray: #f8f7f5;
-            --dark-gray: #2c2c2c;
-            --text-gray: #5a5a5a;
-            --border-color: #dcd5cc;
-            --shadow: 0 4px 15px rgba(74, 35, 90, 0.1);
-            --shadow-lg: 0 8px 30px rgba(74, 35, 90, 0.15);
+            --primary-blue: #0f766e;
+            --secondary-blue: #2563eb;
+            --accent-orange: #f4b740;
+            --light-gray: #f5f7fb;
+            --dark-gray: #0f172a;
+            --text-gray: #5b6578;
+            --border-color: #d8e0ea;
+            --shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+            --shadow-lg: 0 22px 60px rgba(15, 23, 42, 0.24);
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(15, 118, 110, 0.18), transparent 34%),
+                linear-gradient(145deg, #07111f 0%, #0b1729 48%, #10213d 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .login-container {
-            background: white;
-            border-radius: 12px;
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            pointer-events: none;
+            border-radius: 999px;
+            filter: blur(4px);
+            opacity: 0.55;
+        }
+
+        body::before {
+            width: 280px;
+            height: 280px;
+            left: -100px;
+            top: 8vh;
+            background: radial-gradient(circle, rgba(244, 183, 64, 0.22), transparent 70%);
+        }
+
+        body::after {
+            width: 360px;
+            height: 360px;
+            right: -140px;
+            bottom: -120px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.2), transparent 72%);
+        }
+
+        .auth-shell {
+            min-height: calc(100vh - 48px);
+            display: grid;
+            grid-template-columns: minmax(320px, 1.05fr) minmax(420px, 0.95fr);
+            border-radius: 28px;
+            overflow: hidden;
             box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            position: relative;
+            isolation: isolate;
+        }
+
+        .auth-shell::before {
+            content: '';
+            position: absolute;
+            inset: 0 auto auto 0;
             width: 100%;
-            max-width: 380px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-orange), #7dd3fc, var(--primary-blue));
+            z-index: 2;
+        }
+
+        .auth-hero {
+            background:
+                linear-gradient(180deg, rgba(6, 12, 26, 0.92), rgba(9, 18, 39, 0.94)),
+                radial-gradient(circle at top right, rgba(37, 99, 235, 0.22), transparent 40%);
+            color: white;
+            padding: 34px 34px 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
             overflow: hidden;
         }
 
-        .login-header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        .auth-hero::after {
+            content: '';
+            position: absolute;
+            inset: auto -15% -20% auto;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(244, 183, 64, 0.14), transparent 68%);
+            pointer-events: none;
+        }
+
+        .auth-hero-top {
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 84px;
+        }
+
+        .auth-brand .brand-logo--header {
+            width: 102px;
+            height: auto;
+            max-width: 100%;
+            filter: brightness(3.35) saturate(1.25) drop-shadow(0 6px 14px rgba(255, 255, 255, 0.16));
+        }
+
+        .auth-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(226, 232, 240, 0.7);
+            margin-bottom: 18px;
+        }
+
+        .auth-kicker::before {
+            content: '';
+            width: 44px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        .auth-hero h1 {
+            font-size: clamp(36px, 4vw, 56px);
+            line-height: 0.98;
+            margin-bottom: 18px;
+            letter-spacing: -0.04em;
+        }
+
+        .auth-hero p {
+            max-width: 420px;
+            color: rgba(226, 232, 240, 0.76);
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .auth-feature-list {
+            display: grid;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: rgba(255, 255, 255, 0.88);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .auth-feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 46px;
+            color: #f43f5e;
+            border: 1px solid rgba(244, 63, 94, 0.35);
+            background: rgba(244, 63, 94, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .auth-hero-footer {
+            position: relative;
+            z-index: 1;
+            padding-top: 40px;
+        }
+
+        .auth-hero-footer .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-hero-footer .back-link:hover {
             color: white;
-            padding: 28px 18px 24px;
+            gap: 12px;
+        }
+
+        .auth-panel {
+            background: linear-gradient(180deg, rgba(244, 247, 252, 0.98), rgba(238, 243, 249, 0.96));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 34px;
+        }
+
+        .login-container {
+            width: min(100%, 600px);
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(148, 163, 184, 0.22);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+        }
+
+        .login-header {
+            background: transparent;
+            color: #18233f;
+            padding: 38px 32px 14px;
             text-align: center;
         }
 
         .login-header .logo-section {
-            margin-bottom: 12px;
+            margin-bottom: 18px;
         }
 
         .login-header .brand-logo--header {
-            width: 96px;
+            width: 108px;
             height: auto;
             max-width: 100%;
+            filter: brightness(0.82) saturate(1.55) contrast(1.1) drop-shadow(0 4px 10px rgba(31, 45, 85, 0.18));
         }
 
         .emblem {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+            width: 76px;
+            height: 76px;
+            background: #1f2d55;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            font-size: 36px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 34px;
+            box-shadow: 0 12px 24px rgba(31, 45, 85, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .login-header h1 {
-            font-size: 24px;
-            margin-bottom: 8px;
+            font-size: 36px;
+            margin-bottom: 10px;
+            letter-spacing: -0.04em;
+            color: #1f2d55;
         }
 
         .login-header p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 16px;
+            color: #8fa3c7;
         }
 
         .login-body {
-            padding: 28px 24px;
+            padding: 18px 34px 34px;
+            background: transparent;
         }
 
         .form-group {
@@ -96,30 +288,32 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--dark-gray);
+            color: #152238;
             font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
             font-size: 14px;
             transition: all 0.3s ease;
-            background: white;
+            background: rgba(255, 255, 255, 0.96);
             color: var(--dark-gray);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
         }
 
         .form-group select {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
             font-size: 14px;
             transition: all 0.3s ease;
-            background: white;
+            background: rgba(255, 255, 255, 0.96);
             color: var(--dark-gray);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
         }
 
         .password-field {
@@ -152,7 +346,7 @@
         .form-group select:focus {
             outline: none;
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.1);
+            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
         }
 
         .form-group input::placeholder {
@@ -161,18 +355,31 @@
 
         .form-group input.error {
             border-color: #f44336;
-            background: #ffebee;
+            background: #fff5f5;
         }
 
         .error-message {
             color: #f44336;
-            font-size: 12px;
-            margin-top: 5px;
+            font-size: 13px;
+            margin-top: 8px;
             display: none;
+            align-items: center;
+            gap: 8px;
+            line-height: 1.4;
+            font-weight: 600;
         }
 
         .error-message.show {
-            display: block;
+            display: flex;
+        }
+
+        .error-message.show::before {
+            content: '\f06a';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 14px;
+            color: #f44336;
+            flex: 0 0 auto;
         }
 
         .checkbox-group {
@@ -217,20 +424,21 @@
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            background: linear-gradient(135deg, var(--primary-blue), #177e89 44%, var(--secondary-blue));
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 15px;
+            box-shadow: 0 14px 24px rgba(15, 118, 110, 0.24);
         }
 
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 18px 28px rgba(37, 99, 235, 0.24);
         }
 
         .login-btn:active {
@@ -255,7 +463,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: var(--border-color);
+            background: rgba(21, 34, 56, 0.14);
         }
 
         .divider::before {
@@ -268,35 +476,73 @@
 
         .social-login {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 10px;
             margin-bottom: 20px;
         }
 
         .social-btn {
+            width: 100%;
             padding: 12px;
-            border: 2px solid var(--border-color);
-            background: white;
-            border-radius: 6px;
+            border: 1.5px solid rgba(21, 34, 56, 0.14);
+            background: rgba(255, 255, 255, 0.82);
+            border-radius: 12px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            justify-content: flex-start;
+            gap: 10px;
+            white-space: nowrap;
         }
 
         .social-btn:hover {
             border-color: var(--primary-blue);
             color: var(--primary-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+        }
+
+        .social-btn--google {
+            padding-left: 14px;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .google-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .aadhaar-icon {
+            width: 22px;
+            height: 22px;
+            flex: 0 0 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .aadhaar-icon svg {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
         .register-link {
             text-align: center;
             padding-top: 20px;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid rgba(21, 34, 56, 0.12);
         }
 
         .register-link p {
@@ -333,7 +579,7 @@
         .success-message,
         .error-message-box {
             padding: 15px;
-            border-radius: 6px;
+            border-radius: 12px;
             margin-bottom: 20px;
             display: none;
             font-size: 14px;
@@ -365,7 +611,7 @@
             }
 
             .login-header .brand-logo--header {
-                width: 88px;
+                width: 100px;
             }
 
             .emblem {
@@ -447,114 +693,244 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 1100px) {
+            .auth-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-hero {
+                min-height: 360px;
+            }
+
+            .auth-panel {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+
+            .auth-shell {
+                min-height: auto;
+                border-radius: 22px;
+            }
+
+            .auth-hero {
+                padding: 24px 20px 22px;
+            }
+
+            .auth-hero h1 {
+                font-size: 34px;
+            }
+
+            .auth-hero p {
+                font-size: 15px;
+            }
+
+            .auth-feature-item {
+                font-size: 14px;
+            }
+
+            .auth-panel {
+                padding: 16px;
+            }
+
+            .login-container {
+                border-radius: 22px;
+            }
+
+            .login-header {
+                padding: 28px 18px 8px;
+            }
+
+            .login-header h1 {
+                font-size: 28px;
+            }
+
+            .login-body {
+                padding: 18px 18px 24px;
+            }
+
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-shell {
+                border-radius: 18px;
+            }
+
+            .auth-hero {
+                padding: 22px 16px 18px;
+                min-height: 300px;
+            }
+
+            .auth-brand .brand-logo--header {
+                width: 92px;
+            }
+
+            .auth-hero h1 {
+                font-size: 30px;
+            }
+
+            .auth-panel {
+                padding: 12px;
+            }
+
+            .login-header h1 {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body data-stackly-no-loader="true">
 
-    <div class="login-container">
-        <!-- Login Header -->
-        <div class="login-header">
-       
-            <div class="logo-section">
+    <div class="auth-shell">
+        <section class="auth-hero" aria-label="Government services highlights">
+            <div class="auth-hero-top">
+                <div class="auth-brand">
                     <a href="index.html" class="brand-link" aria-label="Stackly home">
                         <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="brand-logo brand-logo--header">
                     </a>
                 </div>
-            <h1>Stackly Login</h1>
-            <p>Access Government Services</p>
-        </div>
+                <div class="auth-kicker">Government Services Portal</div>
+                <h1>Welcome Back</h1>
+                <p>Sign in to access your municipal services, track applications, and manage your city account securely.</p>
+                <ul class="auth-feature-list">
+                    <li class="auth-feature-item"><span class="auth-feature-icon"><i class="fas fa-shield-alt"></i></span> Secure & Encrypted Access</li>
+                    <li class="auth-feature-item"><span class="auth-feature-icon"><i class="fas fa-file-alt"></i></span> Track Your Applications</li>
+                    <li class="auth-feature-item"><span class="auth-feature-icon"><i class="fas fa-bell"></i></span> Real-time Notifications</li>
+                    <li class="auth-feature-item"><span class="auth-feature-icon"><i class="fas fa-users"></i></span> Community Services</li>
+                </ul>
+            </div>
+            <div class="auth-hero-footer">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </section>
 
-        <!-- Login Body -->
-        <div class="login-body">
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
-
-            
-
-            <div id="errorMessage" class="error-message-box"></div>
-            <div id="successMessage" class="success-message"></div>
-
-            <form id="loginForm" autocomplete="off">
-                <!-- Email/Phone -->
-                <div class="form-group">
-                    <label for="emailOrPhone">Email or Mobile Number</label>
-                    <input 
-                        type="text" 
-                        id="emailOrPhone" 
-                        name="emailOrPhone" 
-                        placeholder="Enter your email or 10-digit mobile number"
-                        autocomplete="off"
-                        required
-                    >
-                    <div class="error-message" id="emailPhoneError"></div>
+        <section class="auth-panel">
+            <div class="login-container">
+                <!-- Login Header -->
+                <div class="login-header">
+                    <div class="logo-section">
+                        <a href="index.html" class="brand-link" aria-label="Stackly home">
+                            <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly" class="brand-logo brand-logo--header">
+                        </a>
+                    </div>
+                    <h1>Stackly Login</h1>
+                    <p>Access Government Services</p>
                 </div>
 
-                <!-- Role -->
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select id="role" name="role" required>
-                        <option value="" selected disabled>Select your role</option>
-                        <option value="citizen">Citizen</option>
-                        <option value="official">Department Official</option>
-                        <option value="admin">Administrator</option>
-                    </select>
-                    <div class="error-message" id="roleError"></div>
-                </div>
+                <!-- Login Body -->
+                <div class="login-body">
+                    <div id="errorMessage" class="error-message-box"></div>
+                    <div id="successMessage" class="success-message"></div>
 
-                <!-- Password -->
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="password-field">
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            placeholder="Enter your password"
-                            autocomplete="new-password"
-                            required
-                        >
-                        <button type="button" class="password-toggle" aria-label="Show password" onclick="togglePasswordVisibility('password', this)">
-                            <i class="fas fa-eye"></i>
+                    <form id="loginForm" autocomplete="off" novalidate>
+                        <!-- Email/Phone -->
+                        <div class="form-group">
+                            <label for="emailOrPhone">Email or Mobile Number</label>
+                            <input 
+                                type="text" 
+                                id="emailOrPhone" 
+                                name="emailOrPhone" 
+                                placeholder="Enter your email or 10-digit mobile number"
+                                autocomplete="off"
+                                required
+                            >
+                            <div class="error-message" id="emailPhoneError"></div>
+                        </div>
+
+                        <!-- Role -->
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" name="role" required>
+                                <option value="" selected disabled>Select your role</option>
+                                <option value="citizen">Citizen</option>
+                                <option value="official">Department Official</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                            <div class="error-message" id="roleError"></div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="password-field">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="Enter your password"
+                                    autocomplete="new-password"
+                                    required
+                                >
+                                <button type="button" class="password-toggle" aria-label="Show password" onclick="togglePasswordVisibility('password', this)">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="passwordError"></div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="checkbox-group">
+                            <div class="remember-me">
+                                <input type="checkbox" id="rememberMe" name="rememberMe">
+                                <label for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="404.html" class="forgot-password">Forgot Password?</a>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" class="login-btn">
+                            <span id="btnText">Sign In</span>
+                            <i id="btnIcon" class="fas fa-arrow-right" style="display: none;"></i>
+                        </button>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="divider">or</div>
+
+                    <!-- Social Login -->
+                    <div class="social-login">
+                        <button type="button" class="social-btn social-btn--google" onclick="socialLogin('google')">
+                            <span class="google-icon" aria-hidden="true">
+                                <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+                                    <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.4-5.8 7.5-11.3 7.5-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.1 8 3l5.7-5.7C34.3 5 29.4 3 24 3 12.9 3 4 11.9 4 23s8.9 20 20 20 20-8.9 20-20c0-1.5-.2-2.6-.4-3.5z"/>
+                                    <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 18.9 12 24 12c3.1 0 5.9 1.1 8 3l4.5-4.5C32.4 7.9 28.4 6 24 6 17.2 6 11.2 9.5 6.3 14.7z"/>
+                                    <path fill="#4CAF50" d="M24 44c5.3 0 10.1-2 13.8-5.2l-6.4-5.2C29.6 35.4 27 36.5 24 36.5c-5.4 0-10.1-3.5-11.8-8.4l-6.5 5C9.6 39.3 16.2 44 24 44z"/>
+                                    <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.2 3.5-3.9 6.2-7.1 7.6l.1-.1 6.4 5.2C33.9 39.4 40 33 40 24c0-1.5-.2-2.6-.4-3.5z"/>
+                                </svg>
+                            </span>
+                            Continue with Google
+                        </button>
+                        <button type="button" class="social-btn" onclick="socialLogin('aadhar')">
+                            <span class="aadhaar-icon" aria-hidden="true">
+                                <svg viewBox="0 0 64 48" aria-hidden="true" focusable="false">
+                                    <path fill="#F5B71B" d="M4 20c6.2 0 11.2-5 11.2-11.2C15.2 15 20.2 20 26.4 20 20.2 20 15.2 25 15.2 31.2 15.2 25 10.2 20 4 20zm60 0c-6.2 0-11.2-5-11.2-11.2C52.8 15 47.8 20 41.6 20 47.8 20 52.8 25 52.8 31.2 52.8 25 57.8 20 64 20zM18 8c0-4.4 4.1-8 9.2-8 2 0 3.8 0.6 5.4 1.5-5.2 1.7-9.3 5.8-11 11-1.8-1.6-3.6-3.8-3.6-4.5zm28 0c0-4.4-4.1-8-9.2-8-2 0-3.8 0.6-5.4 1.5 5.2 1.7 9.3 5.8 11 11 1.8-1.6 3.6-3.8 3.6-4.5z"/>
+                                    <path fill="#D92D2A" d="M32 10c-7.7 0-14 6.3-14 14 0 3.4 1.2 6.5 3.1 9l-2.7 2.7C15.9 32.6 14 28.5 14 24c0-9.9 8.1-18 18-18s18 8.1 18 18c0 4.5-1.9 8.6-4.9 11.7l-2.7-2.7c1.9-2.5 3.1-5.6 3.1-9 0-7.7-6.3-14-14-14z"/>
+                                    <path fill="#D92D2A" d="M32 16c-4.4 0-8 3.6-8 8 0 2.3 1 4.5 2.7 6l-2.2 2.2C22.3 30 21 27.1 21 24c0-6.1 4.9-11 11-11s11 4.9 11 11c0 3.1-1.3 6-3.5 8.2L37.3 30c1.7-1.5 2.7-3.7 2.7-6 0-4.4-3.6-8-8-8z"/>
+                                    <path fill="#D92D2A" d="M32 22c-1.1 0-2 .9-2 2 0 .9.6 1.6 1.2 2.2l-1.9 1.9C28.4 27 28 25.6 28 24c0-2.2 1.8-4 4-4s4 1.8 4 4c0 1.6-.4 3-1.3 4.1l-1.9-1.9c.6-.6 1.2-1.3 1.2-2.2 0-1.1-.9-2-2-2z"/>
+                                    <path fill="#D92D2A" d="M18 38h28v4H18z"/>
+                                </svg>
+                            </span>
+                            Aadhaar
                         </button>
                     </div>
-                    <div class="error-message" id="passwordError"></div>
-                </div>
 
-                <!-- Remember Me & Forgot Password -->
-                <div class="checkbox-group">
-                    <div class="remember-me">
-                        <input type="checkbox" id="rememberMe" name="rememberMe">
-                        <label for="rememberMe">Remember me</label>
+                    <!-- Register Link -->
+                    <div class="register-link">
+                        <p>Don't have an account? <a href="signup.html">Register Now</a></p>
                     </div>
-                    <a href="404.html" class="forgot-password">Forgot Password?</a>
                 </div>
-
-                <!-- Login Button -->
-                <button type="submit" class="login-btn">
-                    <span id="btnText">Sign In</span>
-                    <i id="btnIcon" class="fas fa-arrow-right" style="display: none;"></i>
-                </button>
-            </form>
-
-            <!-- Divider -->
-            <div class="divider">or</div>
-
-            <!-- Social Login -->
-            <div class="social-login">
-                <button type="button" class="social-btn" onclick="socialLogin('google')">
-                    <i class="fab fa-google"></i> Google
-                </button>
-                <button type="button" class="social-btn" onclick="socialLogin('aadhar')">
-                    <i class="fas fa-id-card"></i> Aadhaar
-                </button>
             </div>
-
-            <!-- Register Link -->
-            <div class="register-link">
-                <p>Don't have an account? <a href="signup.html">Register Now</a></p>
-            </div>
-        </div>
+        </section>
     </div>
 
     <!-- Forgot Password Modal -->
@@ -563,7 +939,7 @@
             <h2 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 24px;">Forgot Password?</h2>
             <p style="color: var(--text-gray); margin-bottom: 25px; font-size: 14px;">Enter your email or mobile number to receive password reset instructions.</p>
             
-            <form id="forgotPasswordForm" onsubmit="submitForgotPassword(event)">
+            <form id="forgotPasswordForm" onsubmit="submitForgotPassword(event)" novalidate>
                 <div class="form-group">
                     <input 
                         type="text" 
@@ -595,7 +971,7 @@
             let isValid = true;
 
             if (!emailOrPhone) {
-                showFieldError('emailPhone', 'Please enter email or mobile number');
+                showFieldError('emailPhone', 'This field is required.');
                 isValid = false;
             } else if (!validateEmailOrPhone(emailOrPhone)) {
                 showFieldError('emailPhone', 'Please enter a valid email or 10-digit mobile number');
@@ -603,12 +979,12 @@
             }
 
             if (!role) {
-                showFieldError('role', 'Please select your role');
+                showFieldError('role', 'This field is required.');
                 isValid = false;
             }
 
             if (!password) {
-                showFieldError('password', 'Please enter your password');
+                showFieldError('password', 'This field is required.');
                 isValid = false;
             } else if (password.length < 6) {
                 showFieldError('password', 'Password must be at least 6 characters');

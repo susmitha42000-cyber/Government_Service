@@ -148,6 +148,8 @@ function setupAOSAnimations() {
         applyAttributes('.section-subtitle', 'fade-up', { duration: 700, delay: 120 });
 
         applyAttributes('.feature-card', 'zoom-in', { duration: 750, stagger: 90 });
+        applyAttributes('.about-feature-card', 'zoom-in', { duration: 750, stagger: 90 });
+        applyAttributes('.stat-card', 'zoom-in', { duration: 700, stagger: 80 });
         applyAttributes('.service-card', 'fade-up', { duration: 750, stagger: 90 });
         applyAttributes('.scheme-card', 'fade-up', { duration: 750, stagger: 90 });
         applyAttributes('.department-card', 'flip-left', { duration: 800, stagger: 90 });
@@ -546,7 +548,7 @@ function setupContactForm() {
             let isValid = true;
 
             if (!fullName) {
-                showContactError('fullName', 'Please enter your full name');
+                showContactError('fullName', 'This field is required.');
                 isValid = false;
             } else if (!/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(fullName)) {
                 showContactError('fullName', 'Name should contain letters only');
@@ -554,7 +556,7 @@ function setupContactForm() {
             }
 
             if (!email) {
-                showContactError('email', 'Please enter your email address');
+                showContactError('email', 'This field is required.');
                 isValid = false;
             } else if (!validateEmail(email)) {
                 showContactError('email', 'Please enter a valid email address');
@@ -562,7 +564,7 @@ function setupContactForm() {
             }
 
             if (!phone) {
-                showContactError('phone', 'Please enter your mobile number');
+                showContactError('phone', 'This field is required.');
                 isValid = false;
             } else if (!validatePhone(phone)) {
                 showContactError('phone', 'Please enter a valid 10-digit mobile number');
@@ -570,12 +572,12 @@ function setupContactForm() {
             }
 
             if (!subject) {
-                showContactError('subject', 'Please enter a subject');
+                showContactError('subject', 'This field is required.');
                 isValid = false;
             }
 
             if (!message) {
-                showContactError('message', 'Please enter your message');
+                showContactError('message', 'This field is required.');
                 isValid = false;
             } else if (message.length < 10) {
                 showContactError('message', 'Message must be at least 10 characters');
@@ -808,8 +810,7 @@ applyButtons.forEach(button => {
         const buttonText = this.textContent;
         
         if (buttonText.includes('Apply')) {
-            showAlert('Redirecting to application form...', 'info');
-            // In production, redirect to actual application page
+            window.location.href = '404.html';
         } else if (buttonText.includes('Learn')) {
             showAlert('Loading more information...', 'info');
         } else if (buttonText.includes('Read')) {

@@ -109,8 +109,13 @@
         }
 
         .auth-hero-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             position: relative;
             z-index: 1;
+            text-align: center;
+            width: 100%;
         }
 
         .auth-brand {
@@ -118,10 +123,11 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 84px;
+            justify-content: center;
         }
 
         .auth-brand .brand-logo--header {
-            width: 102px;
+            width: 132px;
             height: auto;
             max-width: 100%;
             filter: brightness(3.35) saturate(1.25) drop-shadow(0 6px 14px rgba(255, 255, 255, 0.16));
@@ -136,6 +142,7 @@
             text-transform: uppercase;
             color: rgba(226, 232, 240, 0.7);
             margin-bottom: 18px;
+            justify-content: center;
         }
 
         .auth-kicker::before {
@@ -158,6 +165,8 @@
             font-size: 17px;
             line-height: 1.7;
             margin-bottom: 30px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .auth-feature-list {
@@ -168,15 +177,21 @@
             list-style: none;
             position: relative;
             z-index: 1;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .auth-feature-item {
             display: flex;
             align-items: center;
+            justify-content: flex-start;
             gap: 16px;
             color: rgba(255, 255, 255, 0.88);
             font-weight: 600;
             font-size: 16px;
+            text-align: left;
+            width: 100%;
         }
 
         .auth-feature-icon {
@@ -197,6 +212,8 @@
             position: relative;
             z-index: 1;
             padding-top: 40px;
+            display: flex;
+            justify-content: center;
         }
 
         .auth-hero-footer .back-link {
@@ -243,10 +260,10 @@
         }
 
         .login-header .brand-logo--header {
-            width: 108px;
+            width: 136px;
             height: auto;
             max-width: 100%;
-            filter: brightness(0.82) saturate(1.55) contrast(1.1) drop-shadow(0 4px 10px rgba(31, 45, 85, 0.18));
+            filter: invert(16%) sepia(98%) saturate(5400%) hue-rotate(204deg) brightness(0.72) contrast(1.18) drop-shadow(0 6px 14px rgba(11, 35, 92, 0.24));
         }
 
         .emblem {
@@ -265,9 +282,11 @@
 
         .login-header h1 {
             font-size: 36px;
+            font-weight: 700;
             margin-bottom: 10px;
             letter-spacing: -0.04em;
-            color: #1f2d55;
+            color: #23396b;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
         }
 
         .login-header p {
@@ -611,7 +630,7 @@
             }
 
             .login-header .brand-logo--header {
-                width: 100px;
+                width: 126px;
             }
 
             .emblem {
@@ -770,7 +789,7 @@
             }
 
             .auth-brand .brand-logo--header {
-                width: 92px;
+                width: 118px;
             }
 
             .auth-hero h1 {
@@ -996,6 +1015,16 @@
             }
         });
 
+        function getRoleDisplayLabel(role) {
+            const roleMap = {
+                citizen: 'Citizen',
+                official: 'Department Official',
+                admin: 'Administrator'
+            };
+
+            return roleMap[role] || role;
+        }
+
         function validateEmailOrPhone(value) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const phoneRegex = /^\d{10}$/;
@@ -1046,6 +1075,7 @@
         function submitLogin(emailOrPhone, role, password) {
             const btn = document.querySelector('.login-btn');
             const btnText = document.getElementById('btnText');
+            const roleLabel = getRoleDisplayLabel(role);
 
             // Show loading state
             btn.classList.add('loading');
@@ -1057,12 +1087,15 @@
                 // Check "Remember Me"
                 if (document.getElementById('rememberMe').checked) {
                     localStorage.setItem('rememberedLogin', emailOrPhone);
+                    localStorage.setItem('rememberedRoleLabel', roleLabel);
                 } else {
                     localStorage.removeItem('rememberedLogin');
+                    localStorage.removeItem('rememberedRoleLabel');
                 }
 
                 sessionStorage.setItem('portalCurrentUser', emailOrPhone);
                 sessionStorage.setItem('portalCurrentRole', role);
+                sessionStorage.setItem('portalCurrentRoleLabel', roleLabel);
 
                 const successMessage = document.getElementById('successMessage');
                 successMessage.textContent = 'Login successful!';

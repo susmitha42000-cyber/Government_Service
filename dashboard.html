@@ -1021,7 +1021,7 @@
                     <div class="dashboard-content" id="overview">
                         <div class="dashboard-topbar">
                             <div>
-                                <span class="eyebrow"><i class="fas fa-shield-alt"></i> Citizen Dashboard</span>
+                                <span class="eyebrow" id="dashboardRoleLabel"><i class="fas fa-shield-alt"></i> Citizen Dashboard</span>
                                 <h1 class="dashboard-title">Dashboard</h1>
                                 <p class="dashboard-subtitle">Welcome back, <span id="welcomeName">Citizen</span>.</p>
                             </div>
@@ -1169,15 +1169,31 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const userIdentifier = sessionStorage.getItem('portalCurrentUser') || localStorage.getItem('rememberedLogin');
+            const roleValue = sessionStorage.getItem('portalCurrentRole');
+            const storedRoleLabel = sessionStorage.getItem('portalCurrentRoleLabel') || localStorage.getItem('rememberedRoleLabel');
             const userIdentifierEl = document.getElementById('userIdentifier');
             const userIdentifierSidebarEl = document.getElementById('userIdentifierSidebar');
             const welcomeNameEl = document.getElementById('welcomeName');
+            const dashboardRoleLabelEl = document.getElementById('dashboardRoleLabel');
             const authWarning = document.getElementById('authWarning');
             const dashboardPanel = document.querySelector('.dashboard-panel');
             const dashboardMenuToggle = document.getElementById('dashboardMenuToggle');
             const dashboardSidebarBackdrop = document.getElementById('dashboardSidebarBackdrop');
             const dashboardLogoutBtn = document.getElementById('dashboardLogoutBtn');
             const fallbackGuest = 'Guest';
+
+            function getRoleDisplayLabel(role) {
+                const roleMap = {
+                    citizen: 'Citizen',
+                    official: 'Department Official',
+                    admin: 'Administrator'
+                };
+
+                return roleMap[role] || '';
+            }
+
+            const roleLabel = storedRoleLabel || getRoleDisplayLabel(roleValue) || fallbackGuest;
+            const dashboardTitleLabel = `${roleLabel} Dashboard`;
 
             function openDashboardMenu() {
                 if (!dashboardPanel || !dashboardMenuToggle) return;
@@ -1212,7 +1228,10 @@
             if (dashboardLogoutBtn) {
                 dashboardLogoutBtn.addEventListener('click', function() {
                     sessionStorage.removeItem('portalCurrentUser');
+                    sessionStorage.removeItem('portalCurrentRole');
+                    sessionStorage.removeItem('portalCurrentRoleLabel');
                     localStorage.removeItem('rememberedLogin');
+                    localStorage.removeItem('rememberedRoleLabel');
                     window.location.href = 'index.html';
                 });
             }
@@ -1231,12 +1250,18 @@
                     userIdentifierSidebarEl.textContent = userIdentifier;
                 }
                 welcomeNameEl.textContent = userIdentifier;
+                if (dashboardRoleLabelEl) {
+                    dashboardRoleLabelEl.innerHTML = `<i class="fas fa-shield-alt"></i> ${dashboardTitleLabel}`;
+                }
             } else {
                 userIdentifierEl.textContent = fallbackGuest;
                 if (userIdentifierSidebarEl) {
                     userIdentifierSidebarEl.textContent = 'Guest user';
                 }
                 welcomeNameEl.textContent = fallbackGuest;
+                if (dashboardRoleLabelEl) {
+                    dashboardRoleLabelEl.innerHTML = `<i class="fas fa-shield-alt"></i> Guest Dashboard`;
+                }
                 authWarning.style.display = 'block';
             }
 

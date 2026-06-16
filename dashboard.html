@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --dash-bg: #f7f3ef;
             --dash-card: #ffffff;
@@ -17,6 +23,7 @@
             --dash-muted: #5a5a5a;
             --dash-border: #e2d8ce;
             --dash-shadow: 0 14px 35px rgba(74, 35, 90, 0.12);
+            --dash-card-extra-height: 80px;
         }
 
         body {
@@ -29,6 +36,17 @@
             min-height: 100vh;
             overflow-x: hidden;
             overflow-y: hidden;
+            overscroll-behavior: none;
+        }
+
+        body[data-stackly-no-header-offset="true"] {
+            padding-top: 0 !important;
+        }
+
+        html {
+            height: 100%;
+            overflow: hidden;
+            overscroll-behavior: none;
         }
 
         header,
@@ -38,16 +56,19 @@
         }
 
         .dashboard-main {
-            padding: 0 16px 16px;
-            margin-top: 0;
-            height: 100vh;
+            position: relative;
+            padding: 0 16px 16px !important;
+            margin: 0 !important;
+            height: calc(100vh + var(--dash-card-extra-height));
             overflow: hidden;
         }
 
         .dashboard-main .container {
             max-width: none;
             width: 100%;
-            padding: 0;
+            height: 100%;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .dashboard-shell {
@@ -55,19 +76,24 @@
             grid-template-columns: minmax(0, 1fr);
             gap: 24px;
             align-items: start;
-            min-height: 100%;
-            margin-top: -92px;
+            height: 100%;
+            min-height: 0;
+            margin-top: 10px;
+            padding: 0px 0px 0px 0px;
         }
 
         .dashboard-panel {
-            display: block;
+            display: grid;
+            grid-template-columns: 257px minmax(0, 1fr);
+            gap: 24px;
             position: relative;
-            padding: 18px 18px 18px 313px;
-            background: linear-gradient(180deg, #0b1120 0%, #121836 52%, #26123f 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+            padding: 0 18px 18px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
             height: 100%;
+            min-height: 0;
             overflow: hidden;
         }
 
@@ -81,18 +107,19 @@
 
         .dashboard-sidebar {
             position: fixed;
-            top: 18px;
+            top: 0;
             left: 34px;
             border-radius: 22px;
             background: linear-gradient(180deg, rgba(8, 14, 28, 0.98), rgba(24, 14, 47, 0.98) 62%, rgba(57, 16, 84, 0.98));
             color: white;
             padding: 22px 18px;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 36px rgba(0, 0, 0, 0.28);
-            height: calc(100vh - 36px);
-            max-height: calc(100vh - 36px);
+            height: calc(100vh - 18px);
+            max-height: calc(100vh - 18px);
             overflow: hidden;
             width: 257px;
             z-index: 20;
+            align-self: start;
         }
 
         .sidebar-brand {
@@ -178,20 +205,37 @@
         }
 
         .dashboard-content {
+            grid-column: 2;
             min-width: 0;
             color: #eef2ff;
-            padding-right: 4px;
-            height: calc(100vh - 36px);
+            padding: 0 18px 44px;
+            background: linear-gradient(180deg, #0b1120 0%, #121836 52%, #26123f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+            height: calc(100vh - 18px + var(--dash-card-extra-height));
+            min-height: 0;
             overflow-y: auto;
             overflow-x: hidden;
+            overscroll-behavior: contain;
             scrollbar-gutter: stable;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(214, 178, 79, 0.72) rgba(255, 255, 255, 0.06);
         }
 
         .dashboard-content::-webkit-scrollbar {
-            width: 0;
-            height: 0;
+            width: 10px;
+        }
+
+        .dashboard-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+        }
+
+        .dashboard-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(214, 178, 79, 0.9), rgba(106, 59, 160, 0.9));
+            border-radius: 999px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
         }
 
         .dashboard-topbar {
@@ -638,6 +682,38 @@
             padding: 24px;
         }
 
+        .updates-card {
+            background:
+                linear-gradient(145deg, rgba(16, 24, 48, 0.98), rgba(42, 28, 70, 0.98)),
+                rgba(12, 19, 36, 0.96);
+            border: 1px solid rgba(214, 178, 79, 0.35);
+            border-radius: 24px;
+            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .updates-card h2 {
+            color: #ffffff;
+            margin-bottom: 18px;
+        }
+
+        .updates-card .notice-list {
+            gap: 14px;
+        }
+
+        .updates-card .notice-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .updates-card .notice-item strong {
+            color: #ffffff;
+            font-size: 16px;
+        }
+
+        .updates-card .notice-item span {
+            color: rgba(238, 242, 255, 0.86);
+        }
+
         .dashboard-card h2 {
             font-size: 22px;
             color: #ffffff;
@@ -720,38 +796,39 @@
             display: none;
         }
 
-            @media (max-width: 980px) {
-            body {
-                overflow: auto;
-            }
-
+        @media (max-width: 980px) {
             .dashboard-shell {
                 grid-template-columns: 1fr;
-                height: auto;
-                min-height: auto;
+                height: 100%;
+                min-height: 0;
             }
 
             .dashboard-panel {
                 display: grid;
-                grid-template-columns: 1fr;
-                height: auto;
-                min-height: auto;
-                padding: 20px;
-                overflow: visible;
+                grid-template-columns: 236px minmax(0, 1fr);
+                gap: 18px;
+                height: 100%;
+                min-height: 0;
+                padding: 0 18px 18px;
+                overflow: hidden;
             }
 
             .dashboard-sidebar {
-                position: static;
+                position: fixed;
+                top: 0;
+                left: 34px;
                 min-height: auto;
-                height: auto;
-                max-height: none;
-                overflow: visible;
-                width: auto;
+                height: calc(100vh - 18px);
+                max-height: calc(100vh - 18px);
+                overflow: hidden;
+                width: 236px;
             }
 
             .dashboard-content {
-                height: auto;
-                overflow: visible;
+                height: calc(100vh - 18px + var(--dash-card-extra-height));
+                min-height: 0;
+                overflow-y: auto;
+                overflow-x: hidden;
             }
 
             .stats-grid,
@@ -767,15 +844,20 @@
         }
 
         @media (max-width: 640px) {
+            :root {
+                --dash-card-extra-height: 0px;
+            }
+
             .dashboard-main {
                 padding: 12px;
                 margin-top: 0;
-                height: auto;
-                overflow: visible;
+                height: 100vh;
+                overflow: hidden;
             }
 
             .dashboard-shell {
-                margin-top: -12px;
+                margin-top: 0;
+                height: 100%;
             }
 
             .dashboard-main .container {
@@ -786,7 +868,19 @@
                 display: block;
                 padding: 16px;
                 gap: 18px;
-                overflow: visible;
+                margin-left: 0;
+                width: auto;
+                overflow: hidden;
+            }
+
+            .dashboard-content {
+                padding: 0;
+                background: transparent;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                height: auto;
+                min-height: 0;
             }
 
             .dashboard-mobile-bar {
@@ -842,8 +936,7 @@
                 width: min(88vw, 320px);
                 height: 100vh;
                 max-height: 100vh;
-                overflow-y: auto;
-                overflow-x: hidden;
+                overflow: hidden;
                 transform: translateX(-110%);
                 transition: transform 0.28s ease, box-shadow 0.28s ease;
                 border-radius: 0 24px 24px 0;
@@ -966,7 +1059,6 @@
                             <li><a href="dashboard.html" class="nav-link active">Dashboard</a></li>
                             <li><a href="services.html" class="nav-link">Services</a></li>
                             <li><a href="schemes.html" class="nav-link">Welfare Schemes</a></li>
-                            <li><a href="departments.html" class="nav-link">Departments</a></li>
                             <li><a href="tracking.html" class="nav-link">Tracking</a></li>
                             <li><a href="contact.html" class="nav-link">Contact</a></li>
                         </ul>
@@ -1133,7 +1225,7 @@
                                 </div>
                             </div>
 
-                            <div class="dashboard-card">
+                            <div class="dashboard-card updates-card">
                                 <h2>Recent Updates</h2>
                                 <ul class="notice-list">
                                     <li class="notice-item">

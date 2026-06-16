@@ -8,6 +8,27 @@ document.addEventListener('DOMContentLoaded', function () {
             sidebar.id = 'dashboardSidebar';
         }
 
+        if (!sidebar.querySelector('.section-sidebar-header')) {
+            const sidebarHeader = document.createElement('div');
+            sidebarHeader.className = 'section-sidebar-header';
+            sidebarHeader.innerHTML = `
+                <div class="sidebar-brand">
+                    <a href="index.html" class="brand-link" aria-label="Stackly home">
+                        <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly">
+                    </a>
+                </div>
+                <button class="section-sidebar-close" type="button" aria-label="Close dashboard menu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+            `;
+            const existingBrand = sidebar.querySelector(':scope > .sidebar-brand');
+            if (existingBrand) {
+                existingBrand.replaceWith(sidebarHeader);
+            } else {
+                sidebar.insertBefore(sidebarHeader, sidebar.firstChild);
+            }
+        }
+
         if (!document.querySelector('.section-mobile-bar')) {
             const mobileBar = document.createElement('div');
             mobileBar.className = 'section-mobile-bar';
@@ -31,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const menuToggle = document.querySelector('.section-menu-toggle');
     const backdrop = document.querySelector('.section-sidebar-backdrop');
+    const closeButton = document.querySelector('.section-sidebar-close');
 
     function openMenu() {
         if (!sectionShell || !menuToggle) return;
@@ -58,6 +80,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (backdrop) {
         backdrop.addEventListener('click', closeMenu);
+    }
+
+    if (closeButton) {
+        closeButton.addEventListener('click', closeMenu);
     }
 
     document.querySelectorAll('.sidebar-menu a').forEach(function (link) {

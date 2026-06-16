@@ -105,6 +105,10 @@
             display: none;
         }
 
+        .dashboard-sidebar-close {
+            display: none;
+        }
+
         .dashboard-sidebar {
             position: fixed;
             top: 0;
@@ -1090,6 +1094,9 @@
                                     <img src="assets/stackly-whitish_blue-logo.webp" alt="Stackly">
                                 </a>
                             </div>
+                            <button class="dashboard-sidebar-close" id="dashboardSidebarClose" type="button" aria-label="Close dashboard menu">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
                         <ul class="sidebar-menu" aria-label="Dashboard navigation">
                             <li><a href="dashboard.html" class="active"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
@@ -1271,6 +1278,7 @@
             const dashboardPanel = document.querySelector('.dashboard-panel');
             const dashboardMenuToggle = document.getElementById('dashboardMenuToggle');
             const dashboardSidebarBackdrop = document.getElementById('dashboardSidebarBackdrop');
+            const dashboardSidebarClose = document.getElementById('dashboardSidebarClose');
             const dashboardLogoutBtn = document.getElementById('dashboardLogoutBtn');
             const fallbackGuest = 'Guest';
 
@@ -1315,6 +1323,10 @@
 
             if (dashboardSidebarBackdrop) {
                 dashboardSidebarBackdrop.addEventListener('click', closeDashboardMenu);
+            }
+
+            if (dashboardSidebarClose) {
+                dashboardSidebarClose.addEventListener('click', closeDashboardMenu);
             }
 
             if (dashboardLogoutBtn) {

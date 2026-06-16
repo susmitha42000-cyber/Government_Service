@@ -1,0 +1,479 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[a4paper,top=1in,bottom=1in,left=1.25in,right=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{caption}
+
+\definecolor{GovNavy}{HTML}{07101D}
+\definecolor{GovPurple}{HTML}{4A235A}
+\definecolor{GovViolet}{HTML}{6A3BA0}
+\definecolor{GovGold}{HTML}{D4AF37}
+\definecolor{GovGreen}{HTML}{5B8C5A}
+\definecolor{GovLight}{HTML}{F8F7F5}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=GovPurple,
+    urlcolor=GovViolet,
+    citecolor=GovGreen
+}
+
+\onehalfspacing
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0.15cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textit{National Government Portal}}
+\fancyhead[R]{\textit{Project Documentation}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\titleformat{\chapter}[display]
+{\normalfont\bfseries\centering\color{GovPurple}}
+{\chaptertitlename\ \thechapter}{14pt}{\Huge}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{GovPurple}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{GovNavy}}
+{\thesubsection}{1em}{}
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{GovPurple},
+    keywordstyle=\color{GovPurple}\bfseries,
+    commentstyle=\color{GovGreen},
+    stringstyle=\color{GovViolet}
+}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.4in}
+    {\Large\bfseries\color{GovPurple}A PROJECT REPORT ON\par}
+    \vspace{0.35in}
+    {\Huge\bfseries\color{GovNavy}NATIONAL GOVERNMENT PORTAL\par}
+    \vspace{0.2in}
+    {\Large\bfseries\color{GovViolet}Official Digital Gateway for Citizen Services\par}
+    \vspace{0.5in}
+    \rule{0.78\textwidth}{1.2pt}
+    \vspace{0.35in}
+
+    {\large Submitted in partial fulfillment of the requirements for the project documentation of a static multi-page government service website.\par}
+    \vspace{0.6in}
+
+    \begin{tabular}{>{\bfseries}p{2.2in}p{3.2in}}
+        Project Title & National Government Portal \\
+        Domain & Digital Governance and Citizen Services \\
+        Frontend Stack & HTML5, CSS3, JavaScript \\
+        Brand Name & Stackly \\
+        Document Date & June 2026 \\
+    \end{tabular}
+
+    \vfill
+    {\large\bfseries\color{GovGold}Prepared for Government Service Website Documentation\par}
+    \vspace{0.2in}
+    {\large C:\textbackslash Government\_Service\par}
+\end{titlepage}
+
+\pagenumbering{roman}
+
+\chapter*{Certificate}
+\addcontentsline{toc}{chapter}{Certificate}
+This is to certify that the project report entitled \textbf{National Government Portal: Official Digital Gateway for Citizen Services} has been prepared based on the complete analysis of the website files contained in the Government Service project directory. The report documents the objectives, modules, design structure, implementation details, validation behavior, dashboard workflow, and future enhancement scope of the website.
+
+The website is implemented as a static multi-page frontend application using HTML, CSS, and JavaScript. It contains public information pages, authentication pages, dashboard pages, service discovery, welfare schemes, public notices, application tracking, contact support, and responsive navigation behavior.
+
+\vspace{0.8in}
+\begin{flushright}
+\textbf{Project Guide / Evaluator}\\
+\vspace{0.6in}
+\rule{2.6in}{0.4pt}
+\end{flushright}
+
+\chapter*{Declaration}
+\addcontentsline{toc}{chapter}{Declaration}
+I hereby declare that this documentation titled \textbf{National Government Portal} is prepared from the analysis of the Government Service website source code and assets. The content presented in this report explains the portal structure, interface modules, functionality, user flow, validation logic, dashboard behavior, and responsive design approach.
+
+The document has been written in a formal project-report format inspired by the referenced Bio Technology Theme document style, using A4 page setup, Times-style typography, title page, certificate, declaration, acknowledgement, abstract, table of contents, and chapter-based documentation.
+
+\vspace{0.8in}
+\begin{flushright}
+\textbf{Signature}\\
+\vspace{0.6in}
+\rule{2.6in}{0.4pt}
+\end{flushright}
+
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{Acknowledgement}
+I express my sincere gratitude to all who supported the preparation of this project documentation. The National Government Portal website has been studied as a complete digital governance interface that aims to simplify public service access for citizens.
+
+The website demonstrates the importance of citizen-focused design, clear navigation, responsive layouts, secure access patterns, and well-organized public information. I also acknowledge the usefulness of the referenced Bio Technology Theme document for guiding the formal structure and academic style of this report.
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+The \textbf{National Government Portal} is a static multi-page government service website designed to provide citizens with unified access to services, welfare schemes, public notices, departments, news, application tracking, contact support, and role-based dashboard access. The portal uses HTML5 for structure, CSS3 for visual styling and responsive layout, and JavaScript for interactivity, validation, loader behavior, counters, navigation control, and simulated application tracking.
+
+The website focuses on transparent governance, digital transformation, citizen empowerment, and secure public-service access. It includes a branded Stackly interface, login and signup pages, a dashboard with analytics and recent updates, mobile hamburger menus, public information sections, and fallback routing for unsupported demo actions. This report documents the website architecture, modules, design principles, implementation details, validation logic, dashboard functionality, testing observations, and future enhancement possibilities.
+
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\chapter{Introduction}
+\section{Overview}
+The National Government Portal is an official digital gateway concept for public-service delivery. It brings essential citizen services, welfare schemes, notices, news, departments, tracking, authentication, and dashboard monitoring into a single web interface.
+
+The portal is built for citizens who need simple access to government services without repeated office visits. It also supports department officials and administrators through role-aware login behavior and dashboard labeling.
+
+\section{Purpose of the Project}
+The main purpose of the website is to provide a centralized platform where citizens can:
+\begin{itemize}[leftmargin=0.4in]
+    \item Explore government services such as Aadhaar, certificates, licenses, land records, passport services, taxes, utilities, pension services, voter services, and marriage certificates.
+    \item Discover welfare schemes and required documents.
+    \item Read public notices, recruitment announcements, tenders, policy updates, and government orders.
+    \item Track application status using an application number and mobile number.
+    \item Register, login, and view a dashboard personalized by role and account identifier.
+    \item Contact the portal support team through a validated contact form.
+\end{itemize}
+
+\section{Scope}
+The project scope includes frontend pages, visual design, navigation behavior, form validation, dashboard layout, mobile responsiveness, interactive counters, page loader behavior, and user-session display using browser storage.
+
+\chapter{System Analysis}
+\section{Existing Problem}
+Citizens often need to visit multiple offices or websites to access government services. Information may be scattered across departments, and application tracking can be unclear. The portal addresses these problems by grouping services, notices, schemes, and contact support in one interface.
+
+\section{Proposed System}
+The proposed system is a static frontend government portal with a clean navigation structure and responsive design. It provides:
+\begin{itemize}[leftmargin=0.4in]
+    \item A public home page with service highlights and statistics.
+    \item Separate pages for services, welfare schemes, departments, notices, news, tracking, and contact.
+    \item Authentication pages for login and registration.
+    \item A dashboard with sidebar navigation, key metrics, charts, service status, and recent updates.
+    \item Dashboard submenu pages for analytics, campaigns, leads, clients, reports, settings, and profile.
+    \item Shared JavaScript for loader, navigation, validation, animation, tracking, and alerts.
+\end{itemize}
+
+\section{Advantages}
+\begin{itemize}[leftmargin=0.4in]
+    \item Single-window access for major citizen-service categories.
+    \item Clear information hierarchy for public services and schemes.
+    \item Responsive interface for desktop and mobile users.
+    \item Role-aware login flow for citizen, department official, and administrator users.
+    \item Validated contact and tracking forms.
+    \item Accessible navigation links and visible feedback alerts.
+\end{itemize}
+
+\chapter{Website Architecture}
+\section{Project Structure}
+The project is organized as a static web application inside the \texttt{C:\textbackslash Government\_Service} directory.
+
+\begin{longtable}{|p{2.0in}|p{3.6in}|}
+\hline
+\textbf{File / Folder} & \textbf{Purpose} \\
+\hline
+\texttt{index.html} & Home page with hero section, services, schemes, departments, notices, tracking, news, testimonials, and contact preview. \\
+\hline
+\texttt{about.html} & About page describing mission, priorities, transparent governance, digital transformation, citizen empowerment, and secure services. \\
+\hline
+\texttt{services.html} & Lists major government services and explains service categories and application process. \\
+\hline
+\texttt{schemes.html} & Displays welfare schemes, eligibility information, required documents, and beneficiary groups. \\
+\hline
+\texttt{departments.html} & Shows government departments and coordination guidance. \\
+\hline
+\texttt{notices.html} & Displays public notices, notice categories, and citizen advisory. \\
+\hline
+\texttt{news.html} & Presents news, media centre content, public advisories, and focus areas. \\
+\hline
+\texttt{tracking.html} & Provides application status lookup and tracking progress display. \\
+\hline
+\texttt{contact.html} & Contains support contact form, address, phone, email, and office hours. \\
+\hline
+\texttt{login.html} & Handles role-based login and stores session details for dashboard display. \\
+\hline
+\texttt{signup.html} & Handles citizen account registration with role, email, mobile, Aadhaar, and password fields. \\
+\hline
+\texttt{dashboard.html} & Main dashboard page with sidebar, account display, metrics, charts, service status, and updates. \\
+\hline
+\texttt{analytics.html} to \texttt{profile.html} & Dashboard submenu pages. \\
+\hline
+\texttt{style.css} & Shared global styling, responsive design, loader, cards, sections, footer, and navigation. \\
+\hline
+\texttt{script.js} & Shared JavaScript for initialization, navigation, loader, validation, tracking, alerts, and accessibility helpers. \\
+\hline
+\texttt{dashboard-sections.css} and \texttt{dashboard-sections.js} & Shared styling and behavior for dashboard submenu pages. \\
+\hline
+\texttt{assets/} & Contains Stackly logo, hero background, and service images. \\
+\hline
+\end{longtable}
+
+\section{Navigation Flow}
+The public header navigation contains Home, About, Services, Welfare Schemes, Public Notice, News \& Media, and Contact. Login and Register controls are placed in the header. On mobile screens, authentication links are injected into the hamburger menu.
+
+The dashboard uses a fixed sidebar containing Dashboard, Analytics, Campaigns, Leads, Clients, Reports, Settings, Profile, and Logout. On mobile screens, the dashboard menu is accessed through a hamburger icon and closed using an X icon.
+
+\chapter{Module Description}
+\section{Home Page}
+The home page introduces the portal with the headline \textit{Serving Citizens Through Digital Governance}. It promotes secure access, 24/7 support, fast services, and transparent governance. The page also includes major services, schemes, departments, public notices, tracking preview, news, testimonials, and contact information.
+
+\section{About Module}
+The About page explains the portal's core values:
+\begin{itemize}[leftmargin=0.4in]
+    \item Transparent Governance
+    \item Digital Transformation
+    \item Citizen Empowerment
+    \item Secure Public Services
+\end{itemize}
+
+It also describes the mission of bringing public services, official information, applications, notices, and citizen support into one digital access point.
+
+\section{Services Module}
+The services page contains twelve service cards:
+\begin{enumerate}[leftmargin=0.4in]
+    \item Aadhaar Services
+    \item Birth Certificate
+    \item Death Certificate
+    \item Income Certificate
+    \item Driving License
+    \item Passport Services
+    \item Property Tax
+    \item Utility Bill Payments
+    \item Pension Services
+    \item Voter Services
+    \item Land Records
+    \item Marriage Certificate
+\end{enumerate}
+
+The page also explains service categories such as certificates, identity and civic records, licenses and permits, and payments and utilities.
+
+\section{Welfare Schemes Module}
+The welfare schemes page displays important schemes including PM Kisan, Ayushman Bharat, PM Awas Yojana, Skill India, Digital India, Startup India, National Education Mission, and Women Empowerment Programs.
+
+The module also explains common documents such as identity proof, address proof, income certificate, bank details, education records, health documents, and employment documents.
+
+\section{Departments Module}
+The departments page lists Revenue, Education, Health, Agriculture, Transport, Rural Development, Urban Development, and Municipal Administration departments. It helps citizens identify the correct office before applying, visiting, or raising a follow-up request.
+
+\section{Public Notice Module}
+The notices page includes government announcements dated June 5 to June 10, 2026. Notice types include public announcements, recruitment notifications, tender notices, policy updates, government orders, and holiday announcements.
+
+\section{News and Media Module}
+The news page communicates official information through initiative updates, development projects, welfare programs, press releases, national announcements, economic updates, public advisories, and media centre content.
+
+\section{Tracking Module}
+The tracking page accepts an application number and a 10-digit mobile number. After validation, it displays application status stages such as Submitted, Verification, Processing, and Approval. The status is simulated through JavaScript for demonstration.
+
+\section{Contact Module}
+The contact page provides a form for full name, email address, mobile number, subject, and message. It also displays address, phone numbers, support emails, response time, and office hours.
+
+\section{Authentication Module}
+The login page allows users to select a role: Citizen, Department Official, or Administrator. The selected role is stored and used in the dashboard label. The right-side dashboard account display shows only the email or phone number, avoiding duplicate role display.
+
+The signup page collects first name, last name, email, mobile number, role, optional Aadhaar number, password, confirm password, and terms acceptance.
+
+\section{Dashboard Module}
+The dashboard presents:
+\begin{itemize}[leftmargin=0.4in]
+    \item User account identifier under \textit{Logged in as}.
+    \item Role-aware dashboard label.
+    \item Portal summary card.
+    \item Key metrics: Total Citizens, Active Services, Pending Requests, and Welfare Schemes.
+    \item Service request bar chart.
+    \item Traffic line chart.
+    \item Service status donut summary.
+    \item Recent updates for service upgrades, scheme alerts, application reminders, and department notices.
+\end{itemize}
+
+\chapter{Design and Interface}
+\section{Theme}
+The website uses a government-oriented dark and premium visual theme. The key colors include deep navy, purple, violet, gold, white, and green. These colors support official tone, contrast, and visual hierarchy.
+
+\begin{longtable}{|p{1.7in}|p{1.5in}|p{2.2in}|}
+\hline
+\textbf{Color Name} & \textbf{Hex Code} & \textbf{Usage} \\
+\hline
+Deep Navy & \texttt{\#07101D} & Background and dashboard base. \\
+\hline
+Primary Purple & \texttt{\#4A235A} & Brand accent, headings, and dashboard highlights. \\
+\hline
+Violet & \texttt{\#6A3BA0} & Secondary accent and gradients. \\
+\hline
+Gold & \texttt{\#D4AF37} & Icons, highlights, borders, and important labels. \\
+\hline
+Green & \texttt{\#5B8C5A} & Positive government-service accent. \\
+\hline
+\end{longtable}
+
+\section{Typography and Layout}
+The website uses modern web typography and card-based layouts. The documentation uses Times-style typography to match the formal report format of the referenced document. Web sections are separated into cards, grids, content bands, process steps, and responsive containers.
+
+\section{Responsive Design}
+The website supports desktop and mobile screens through CSS media queries and JavaScript-controlled hamburger menus. Dashboard pages include a mobile bar and off-canvas sidebar behavior. Public pages show mobile navigation with login and register links included inside the menu.
+
+\chapter{Implementation Details}
+\section{HTML}
+HTML files define the document structure, semantic sections, forms, navigation menus, service cards, dashboard cards, and content blocks. Each public page includes a shared header, footer, loader, and back-to-top button.
+
+\section{CSS}
+The \texttt{style.css} file contains:
+\begin{itemize}[leftmargin=0.4in]
+    \item CSS variables for colors and shadows.
+    \item Global reset and box sizing.
+    \item Loader panel styling.
+    \item Header, navigation, hero, grids, cards, sections, forms, footer, and responsive rules.
+    \item Button, badge, social link, and animation styling.
+\end{itemize}
+
+Dashboard-specific CSS is placed inside \texttt{dashboard.html}, while submenu dashboard pages use \texttt{dashboard-sections.css}.
+
+\section{JavaScript}
+The \texttt{script.js} file initializes:
+\begin{itemize}[leftmargin=0.4in]
+    \item Loading screen.
+    \item AOS animation attributes.
+    \item Header offset calculation.
+    \item Mobile navigation.
+    \item Sticky header.
+    \item Smooth scrolling.
+    \item Active navigation highlighting.
+    \item Animated counters.
+    \item Testimonial slider.
+    \item Back-to-top behavior.
+    \item Contact form validation.
+    \item Tracking form simulation.
+    \item Alert notifications.
+    \item Keyboard accessibility.
+\end{itemize}
+
+\section{Session Handling}
+The login page stores the current user identifier and selected role using browser storage. The dashboard reads these values and displays a personalized welcome message and role label.
+
+\chapter{Validation and Testing}
+\section{Form Validation}
+The contact form validates full name, email, phone number, subject, and message. Full name is restricted to letters and spaces. Mobile number validation requires exactly 10 digits. Email validation checks a standard email pattern.
+
+\section{Tracking Validation}
+The tracking module checks whether the application number and mobile number are entered. It also validates that the mobile number contains exactly 10 numeric digits.
+
+\section{Authentication Validation}
+The signup page includes required fields for identity and account creation. The role dropdown includes Citizen, Department Official, and Administrator. Password and confirm password fields support account creation validation.
+
+\section{Responsive Testing}
+The website includes desktop and mobile layout behavior. Public pages use responsive navigation. Dashboard pages use fixed sidebar behavior on desktop and off-canvas menu behavior on mobile. Mobile dashboard submenus include an X icon for closing the sidebar.
+
+\chapter{Security and Accessibility Considerations}
+\section{Security Considerations}
+As a static frontend project, the portal does not include server-side authentication, database storage, or encrypted backend sessions. However, the interface demonstrates secure-service concepts such as account-based dashboard display, role selection, validated inputs, and warnings for missing sign-in state.
+
+For production deployment, the project would need:
+\begin{itemize}[leftmargin=0.4in]
+    \item Server-side authentication.
+    \item Secure password hashing.
+    \item Role-based authorization.
+    \item Database-backed application tracking.
+    \item HTTPS hosting.
+    \item CSRF and XSS protection.
+    \item Audit logging for administrative actions.
+\end{itemize}
+
+\section{Accessibility Considerations}
+The website includes accessibility improvements such as aria labels for navigation controls, keyboard focus indicators, visible form labels, semantic headings, and clear button text. The dashboard hamburger menu uses aria-expanded and aria-controls attributes.
+
+\chapter{Results}
+The completed website provides a functional static frontend demonstration of a government service portal. It includes a professional interface, public information pages, interactive forms, responsive navigation, dashboard personalization, and clear service organization.
+
+\begin{longtable}{|p{2.1in}|p{3.5in}|}
+\hline
+\textbf{Feature} & \textbf{Result} \\
+\hline
+Public Information & Home, About, Services, Schemes, Departments, Notices, News, Contact, and Tracking pages are available. \\
+\hline
+Authentication & Login and registration pages support role selection and account identifier flow. \\
+\hline
+Dashboard & Main dashboard shows role label, account identifier, metrics, charts, status, and recent updates. \\
+\hline
+Mobile Navigation & Public and dashboard pages support hamburger navigation. \\
+\hline
+Validation & Contact and tracking forms provide client-side validation. \\
+\hline
+Visual Design & Stackly branding, deep navy/purple/gold theme, card layout, gradients, and responsive structure are implemented. \\
+\hline
+\end{longtable}
+
+\chapter{Future Enhancements}
+Future improvements may include:
+\begin{itemize}[leftmargin=0.4in]
+    \item Backend integration with real citizen accounts.
+    \item Real database for application status and department records.
+    \item Online payment gateway for taxes and utility bills.
+    \item Real PDF notice downloads.
+    \item Multi-language support with accurate translations.
+    \item Search and filtering across services, schemes, notices, and departments.
+    \item Secure administrator panel for content updates.
+    \item SMS and email notifications for application progress.
+    \item Accessibility audit against WCAG standards.
+\end{itemize}
+
+\chapter{Conclusion}
+The National Government Portal is a well-structured static frontend project that demonstrates how digital governance can be presented through a citizen-friendly web interface. It centralizes government services, welfare schemes, public notices, departments, news, tracking, authentication, and dashboard monitoring in one place.
+
+The design uses strong visual branding, responsive layouts, reusable cards, client-side validation, and dashboard personalization. Although the current project is frontend-only, it provides a strong foundation for a production-ready government-service platform when connected with secure backend services, databases, and real department workflows.
+
+\chapter*{Bibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\begin{enumerate}[leftmargin=0.4in]
+    \item Government Service website source files from \texttt{C:\textbackslash Government\_Service}.
+    \item HTML5 documentation and web standards.
+    \item CSS3 responsive design principles.
+    \item JavaScript client-side validation and DOM interaction concepts.
+    \item Referenced Bio Technology Theme 4 PDF format for formal project-report structure.
+\end{enumerate}
+
+\appendix
+\chapter{Appendix: Important Website Pages}
+\begin{longtable}{|p{2.0in}|p{3.6in}|}
+\hline
+\textbf{Page} & \textbf{Main Content} \\
+\hline
+Home & Hero, statistics, about preview, services, schemes, departments, notices, tracking, news, testimonials, contact. \\
+\hline
+About & Governance values, mission, priorities, citizen support. \\
+\hline
+Services & Twelve core services and four-step application process. \\
+\hline
+Schemes & Welfare scheme cards, eligibility, documents, beneficiary groups. \\
+\hline
+Departments & Department cards and citizen coordination guidance. \\
+\hline
+Notices & Government announcements, recruitment, tenders, policy updates, orders, holidays. \\
+\hline
+News & Initiatives, development projects, welfare programs, press releases, economic updates. \\
+\hline
+Tracking & Application status lookup with mobile number validation. \\
+\hline
+Contact & Contact form, address, phone, email, and office timing. \\
+\hline
+Dashboard & Sidebar, account display, metrics, analytics, status, updates, logout. \\
+\hline
+\end{longtable}
+
+\end{document}

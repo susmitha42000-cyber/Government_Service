@@ -289,9 +289,9 @@ iframe {
 
 .header-top-content {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: minmax(150px, auto) minmax(0, 1fr) auto;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     padding: 22px 0;
     width: 100%;
 }
@@ -303,7 +303,7 @@ iframe {
     flex: 0 0 auto;
     margin-left: 0;
     justify-self: start;
-    transform: translateX(-30px);
+    transform: none;
 }
 
 .brand-link {
@@ -351,12 +351,12 @@ iframe {
 .header-controls {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     flex: 0 0 auto;
     margin-left: 0;
     margin-right: 0;
     justify-self: end;
-    transform: translateX(55px);
+    transform: none;
 }
 
 .search-bar {
@@ -442,11 +442,11 @@ iframe {
 
 .nav-link {
     display: inline-block;
-    padding: 9px 12px;
+    padding: 9px 10px;
     color: rgba(255, 255, 255, 0.88);
     text-decoration: none;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 16px;
     transition: var(--transition);
     position: relative;
     white-space: nowrap;
@@ -2205,11 +2205,12 @@ section {
 
 @media (max-width: 1120px) {
     .header-top-content {
+        grid-template-columns: minmax(128px, auto) minmax(0, 1fr) auto;
         gap: 8px;
     }
 
     .logo-section {
-        transform: translateX(-22px);
+        transform: none;
     }
 
     .brand-logo--header {
@@ -2218,13 +2219,19 @@ section {
     }
 
     .nav-link {
-        padding: 8px 8px;
-        font-size: 18px;
+        padding: 8px 6px;
+        font-size: 14px;
     }
 
     .header-controls {
         gap: 4px;
-        transform: translateX(40px);
+        transform: none;
+    }
+
+    .btn-login,
+    .btn-register {
+        padding: 7px 12px;
+        font-size: 13px;
     }
 }
 
